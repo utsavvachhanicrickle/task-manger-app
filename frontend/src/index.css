@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+
+:root {
+  --bg: #ffffff; 
+  --primary: #bdddfc;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f1f5f9;
+  --bg-card: #ffffff;
+  --border: #e2e8f0;
+  --btn-primary-text: #0f172a;
+  --btn-primary-hover: #a9d3fb;
+
+  --btn-outline-text: #0f172a;
+  --btn-outline-border: #bdddfc;
+  --btn-outline-hover: #eaf6ff;
+
+  --shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* DARK MODE */
+[data-theme="dark"] {
+  --bg: #000000; 
+
+  --primary: #bdddfc;
+
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-card: #1e293b;
+
+  --border: #334155;
+
+  --btn-primary-text: #0f172a;
+  --btn-primary-hover: #9ecdf5;
+
+  --btn-outline-text: #f8fafc;
+  --btn-outline-border: #bdddfc;
+  --btn-outline-hover: rgba(189, 221, 252, 0.1);
+
+  --shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
