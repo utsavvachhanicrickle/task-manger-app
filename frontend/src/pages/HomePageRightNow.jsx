@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { SIGNIN } from "../utils/route";
 import TaskNavabar from "../components/tasks/TaskNavabar";
 import { AuthContext } from "../context/authContext";
+import { tasks } from "../utils/constants/tasks";
+
+import { projects } from "../utils/constants/projects";
+import TaskShownComponents from "../components/kanban/TaskShownComponents";
 
 function HomePageRightNow() {
   const navigate = useNavigate();
@@ -41,6 +45,8 @@ function HomePageRightNow() {
         handleProjectAdd={handleProjectAdd}
         handleTaskAdd={handleTaskAdd}
       />
+
+      <TaskShownComponents task={tasks} project={projects} />
     </div>
   );
 }
