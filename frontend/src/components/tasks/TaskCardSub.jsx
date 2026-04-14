@@ -3,9 +3,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "../Button";
 import { buttonVariants } from "../../utils/schema";
 
-function TaskCard({ task, index, handleEdit, handleDelete }) {
-  const isExpired =
-    task.expiredAt && new Date(task.expiredAt) < new Date();
+function TaskCardSub({ task, index, handleEdit, handleDeleteTask }) {
+  const isExpired = task.expiredAt && new Date(task.expiredAt) < new Date();
 
   const priorityColors = {
     low: "bg-[var(--text-muted)]",
@@ -48,7 +47,6 @@ function TaskCard({ task, index, handleEdit, handleDelete }) {
       />
 
       <div className="p-4 flex flex-col gap-3">
-
         {/* HEADER */}
         <div className="flex justify-between items-start gap-2">
           <h2 className="font-semibold text-lg wrap-break-word">
@@ -62,13 +60,14 @@ function TaskCard({ task, index, handleEdit, handleDelete }) {
               ${statusColors[task.status] || "bg-gray-400"}
             `}
           >
-            {task.status}
+            {task.status.charAt(0).toUpperCase() +
+              task.status.slice(1).toLowerCase()}
           </span>
         </div>
 
         {/* DESCRIPTION */}
         <p className="text-sm text-(--text-secondary) wrap-break-word">
-          {task.desc}
+          {task.desc.charAt(0).toUpperCase() }
         </p>
 
         {/* META */}
@@ -105,9 +104,7 @@ function TaskCard({ task, index, handleEdit, handleDelete }) {
 
           <p className={isExpired ? "text-red-500 font-semibold" : ""}>
             ⏳ <strong>Expires:</strong>{" "}
-            {task.expiredAt
-              ? new Date(task.expiredAt).toLocaleString()
-              : "N/A"}
+            {task.expiredAt ? new Date(task.expiredAt).toLocaleString() : "N/A"}
           </p>
         </div>
 
@@ -121,20 +118,23 @@ function TaskCard({ task, index, handleEdit, handleDelete }) {
             <EditIcon fontSize="small" />
             Edit
           </Button>
-
-          <Button
-            variant={buttonVariants.DANGER}
-            className="flex items-center gap-1 text-sm"
-            onClick={() => handleDelete(task._id)}
-          >
-            <DeleteIcon fontSize="small" />
-            Delete
-          </Button>
+          <div onPointerDown={(e) => e.stopPropagation()}>
+            <Button
+              variant={buttonVariants.DANGER}
+              className="flex items-center gap-1 text-sm"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleDeleteTask(task._id);
+              }}
+            >
+              <DeleteIcon fontSize="small" />
+              Delete
+            </Button>
+          </div>
         </div>
-
       </div>
     </div>
   );
 }
 
-export default TaskCard;
+export default TaskCardSub;

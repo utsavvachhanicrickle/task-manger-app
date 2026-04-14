@@ -2,7 +2,7 @@ import { MESSAGES } from "../messages/index.js";
 import AppError from "../AppError.js";
 
 export const AuthValidation = {
-  userExistes: (userId) => {
+  userExists: (userId) => {
     if (!userId) throw new AppError(MESSAGES.USER_UNVERIFIED, 401);
   },
   userNotExistes: (existingUser) => {
@@ -20,6 +20,11 @@ export const AuthValidation = {
 
     if (!email || !password || !confirmPassword || !firstName || !lastName) {
       throw new AppError(MESSAGES.DATA_NOT_EXISTES, 400);
+    }
+  },
+  accessChecking: (existingUserId, userId) => {
+    if (existingUserId.toString() !== userId) {
+      throw new AppError(MESSAGES.ACCESS_DENIED, 401);
     }
   },
 };

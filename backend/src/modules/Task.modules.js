@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { Task as TaskDeclared } from "../utils/schema/index.js"
+import { Task as TaskDeclared } from "../utils/schema/index.js";
 
 const taskSchema = new mongoose.Schema({
   title: {
@@ -48,6 +48,11 @@ const taskSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
+    require: true,
+  },
+  projectId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Project",
     required: true,
   },
 });

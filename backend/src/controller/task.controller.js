@@ -4,7 +4,7 @@ import { MESSAGES } from "../utils/messages/index.js";
 export const taskController = {
   createTask: async (req, res) => {
     try {
-      const data = await taskServices.createTask(req.body, req.userId);
+      const data = await taskServices.createTaskService(req.body, req.userId);
       return res.status(201).json({ message: MESSAGES.TASK_ADD, task: data });
     } catch (error) {
       return res.status(error.statusCode || 500).json({
@@ -15,7 +15,7 @@ export const taskController = {
 
   updateTask: async (req, res) => {
     try {
-      const updatedTask = await taskServices.updateTask(
+      const updatedTask = await taskServices.updateTaskService(
         req.body,
         req.params.id,
         req.userId,
@@ -34,25 +34,9 @@ export const taskController = {
 
   deleteTask: async (req, res) => {
     try {
-      await taskServices.deleteTask(req.params.id, req.userId);
-      return res.status(200).json({ message: MESSAGES.TASK_DELETE });
+      const task = await taskServices.deleteTaskService(req.params.id, req.userId);
+      return res.status(200).json({ message: MESSAGES.TASK_DELETE, task: task });
     } catch (error) {
-      return res.status(error.statusCode || 500).json({
-        message: error.message || MESSAGES.SOMETHING_WRONG,
-      });
-    }
-  },
-
-  getUserTask: async (req, res) => {
-    try {
-      const tasks = await taskServices.getUserTask(req.userId);
-      return res.status(200).json({
-        message: MESSAGES.FETCHED_SUCCESSFULY,
-        tasks : tasks,
-      });
-    } catch (error) {
-      console.log(error);
-      
       return res.status(error.statusCode || 500).json({
         message: error.message || MESSAGES.SOMETHING_WRONG,
       });

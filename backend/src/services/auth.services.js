@@ -1,4 +1,4 @@
-import User from "../models/User.js";
+import User from "../modules/User.modules.js";
 import { MESSAGES } from "../utils/messages/index.js";
 import { createPassword, comparePassword } from "../utils/bcrypt.js";
 import AppError from "../utils/AppError.js";
@@ -106,7 +106,7 @@ export const authServices = {
       maxAge: COOKIESSCHEMA.MAXAGE.ACCESSTOKEN,
       res,
     });
-
+    console.log(`refresh token : ${user.email}`);
     return true;
   },
 };

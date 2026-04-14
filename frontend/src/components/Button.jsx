@@ -8,7 +8,8 @@ function Button({
   className = "",
   ...props
 }) {
-  let baseStyle = "px-4 py-2 rounded-lg transition-all duration-200 font-medium";
+  let baseStyle =
+    "px-4 py-2 rounded-lg transition-all duration-200 font-medium";
 
   let variants = {
     [buttonVariants.PRIMARY]:
@@ -21,7 +22,7 @@ function Button({
       "text-red-500 border border-red-500 hover:bg-red-500 hover:text-white",
 
     other:
-      "bg-[var(--bg-secondary)] text-[var(--text-primary)] border border-[var(--border)]",
+      "bg-[var(--bg-secondary)] text-[var(--text-primary)] hover:text-bold",
   };
 
   return (

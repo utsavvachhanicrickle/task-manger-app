@@ -1,14 +1,12 @@
 export const Task = {
   statusBar: [
     "pending",
-    "in-progress",
+    "inprogress",
     "reviewing",
     "completed",
     "rejected",
-    "on-hold",
+    "onhold",
     "blocked",
-    "cancelled",
-    "archived",
   ],
   categoryBar: [
     "development",

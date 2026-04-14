@@ -17,7 +17,7 @@ export const projectFormFields = {
       required: true,
     },
   ],
-  addProjectFields: (handleCancle, editProjectId) => [
+  addProjectButtons: (handleCancle, editProjectId) => [
     {
       type: buttonInputTypes.CANCLE,
       variant: buttonVariants.OUTLINE,

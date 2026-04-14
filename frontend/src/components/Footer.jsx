@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import { HOME, SIGNIN, SIGNUP } from "../utils/route";
 
-function Footer({ darkMode }) {
+function Footer() {
   return (
     <footer
-      className="w-full mt-10 border-t backdrop-blur-md"
+      className="w-full border-t backdrop-blur-md"
       style={{
         backgroundColor: "var(--bg-primary)",
         color: "var(--text-primary)",

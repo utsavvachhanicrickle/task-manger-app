@@ -1,13 +1,21 @@
 import { taskModules } from "../modules/tasModules";
-import { ADD, DELETE, GET, UPDATE } from "../constants/actionTypes";
 import { MESSAGES } from "../utils/messages";
 import toast from "../utils/Toast.jsx";
 
 export const taskPresenters = {
-  createTask: async (formData, { dispatch }) => {
+  createTask: async (formData, projects, setProjects) => {
     try {
       const { data } = await taskModules.createTask(formData);
-      dispatch({ type: ADD, data });
+      console.log(projects);
+
+      setProjects(
+        projects.map((project) => {
+          if (project._id !== data.task.projectId) return project;
+          else {
+            return { ...project, tasks: [...(project.tasks || []), data.task] };
+          }
+        }),
+      );
       toast.success(MESSAGES.TASK_CREATED);
 
       return { success: true };
@@ -17,10 +25,10 @@ export const taskPresenters = {
       return { success: false };
     }
   },
-  updatetask: async (id, formData, { dispatch }) => {
+  updatetask: async (id, formData, setProjects) => {
     try {
       const { data } = await taskModules.updateTask(id, formData);
-      dispatch({ type: UPDATE, data });
+      setProjects(data.projects);
       toast.success(MESSAGES.TASK_UPDATED);
 
       return { success: true };
@@ -30,25 +38,22 @@ export const taskPresenters = {
       return { success: false };
     }
   },
-  deletetask: async (id, { dispatch }) => {
+  deletetask: async (id, projects, setProjects) => {
     try {
       const { data } = await taskModules.deleteTask(id);
-      dispatch({ type: DELETE, data });
+      setProjects(
+        projects.map((project) =>
+          project._id !== data.projectId
+            ? {
+                ...project,
+                tasks: project.tasks.filter(
+                  (task) => task._id !== data.task._id,
+                ),
+              }
+            : project,
+        ),
+      );
       toast.success(MESSAGES.TASK_DELETE);
-      return { success: true };
-    } catch (error) {
-      console.log(error);
-      toast.error(error.response?.data?.message || MESSAGES.SOMETHING_WRONG);
-      return { success: false };
-    }
-  },
-  getusertask: async (refreshClick, { dispatch }) => {
-    try {
-      const { data } = await taskModules.getUserTask();
-      dispatch({ type: GET, data });
-      if (refreshClick) {
-        toast.success(MESSAGES.FETCHED_SUCCESSFULY);
-      }
       return { success: true };
     } catch (error) {
       console.log(error);

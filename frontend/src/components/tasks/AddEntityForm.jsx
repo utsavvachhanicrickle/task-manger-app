@@ -4,16 +4,17 @@ function AddEntityForm({
   handleSubmit,
   editEntityId,
   handleCancle,
-  entity,
   formDataFields,
   formDataButtons,
 }) {
+  console.log(formDataFields);
+
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-opacity-50">
-      <div className="bg-(--bg-pop) p-6 rounded-lg w-[90%] max-w-md">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+      <div className="bg-(--bg-pop) p-6 rounded-lg w-[90%] max-w-md shadow-lg">
         <FormField
           header={`${editEntityId ? "Update" : "Add"}`}
-          fields={formDataFields(editEntityId, entity)}
+          fields={formDataFields}
           onSubmit={handleSubmit}
           buttons={formDataButtons(handleCancle, editEntityId)}
         />

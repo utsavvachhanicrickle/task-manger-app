@@ -7,5 +7,9 @@ export const APIENDPOINTS = {
   CREATETASK: "/task/add",
   UPDATETASK: "/task/update/",
   DELETETASK: "/task/delete/",
-  GETUSERTASK: "/task/user",
+
+  CREATEPROJECT: "/project/add",
+  UPDATEPROJECT: "/project/update/",
+  DELETEPROJECT: "/project/delete",
+  GETPROJECT: "/project/fetch"
 };

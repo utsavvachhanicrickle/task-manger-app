@@ -50,17 +50,17 @@ function InputField({
           required={required}
           className={`${baseInputStyle} ${className}`}
         >
-          <option value="" disabled className="bg-(--bg-primary)">
+          <option value="" className="bg-(--bg-primary)">
             {placeholder}
           </option>
 
-          {options.map((opt) => (
+          {options.map((opt,index) => (
             <option
-              key={opt}
-              value={opt}
+              key={index}
+              value={opt.value}
               className="bg-(--bg-primary) text-(--text-primary)"
             >
-              {opt}
+              {opt.label}
             </option>
           ))}
         </select>

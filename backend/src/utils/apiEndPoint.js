@@ -11,6 +11,12 @@ export const APIENDPOINTS = {
     CREATETASK: "/add",
     UPDATETASK: "/update/",
     DELETETASK: "/delete/",
-    GETUSERTASK: "/user",
+  },
+  PROJECT: {
+    ROOT: "/project",
+    CREATEPROJECT: "/add",
+    UPDATEPRJECT: "/update/",
+    DELETEPROJECT: "/delete/",
+    FETCHDATA: "/fetch"
   },
 };

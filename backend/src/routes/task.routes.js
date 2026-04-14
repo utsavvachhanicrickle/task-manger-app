@@ -9,6 +9,6 @@ const router = express.Router();
 router.post(APIENDPOINTS.TASK.CREATETASK, authMiddleware, taskController.createTask);
 router.put(`${APIENDPOINTS.TASK.UPDATETASK}:id`, authMiddleware, taskController.updateTask);
 router.delete(`${APIENDPOINTS.TASK.DELETETASK}:id`, authMiddleware, taskController.deleteTask);
-router.get(APIENDPOINTS.TASK.GETUSERTASK, authMiddleware, taskController.getUserTask);
+
 
 export default router;

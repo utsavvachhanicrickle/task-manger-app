@@ -1,19 +1,45 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/authContext";
-import Button from "../components/Button";
+import { ProjectContext } from "../context/projectCntext";
 import { buttonVariants } from "../utils/schema";
+import { projectsPresenters } from "../presenters/projectsPresnters";
+import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 import { SIGNIN } from "../utils/route";
 import TaskNavabar from "../components/tasks/TaskNavabar";
 import AddEntityForm from "../components/tasks/AddEntityForm";
 import { taskFormFields } from "../utils/constants/taskFormFields";
+import { taskPresenters } from "../presenters/taskPresenters";
 import { projectFormFields } from "../utils/constants/projectFormFields";
+import TaskShownComponents from "../components/kanban/TaskShownComponents";
 
 function HomePage() {
   const navigate = useNavigate();
+
   const { authData } = useContext(AuthContext);
+  const { projects, tasks, setProjects } = useContext(ProjectContext);
+
   const [openAddMenu, setOpenAddMenu] = useState(false);
   const [addProject, setAddProject] = useState(false);
+  const [editTaskId, setEditTaskId] = useState(false);
+  const [editProjectId, setEditProjectId] = useState(false);
+
+  const [project, setProject] = useState({});
+  const [task, setTask] = useState({});
+  const [projectOptions, setProjectOptions] = useState({});
+
+  useEffect(() => {
+    const fetProjects = async () =>
+      await projectsPresenters.fetchProjects(false, setProjects);
+
+    fetProjects();
+  }, []);
+
+  useEffect(() => {
+    setProjectOptions(
+      projects.map((project) => ({ label: project.title, value: project._id })),
+    );
+  }, [projects]);
 
   const handleProjectAdd = () => {
     setOpenAddMenu(true);
@@ -25,7 +51,52 @@ function HomePage() {
     setAddProject(false);
   };
 
-  const handleTaskSubmit = (formData) => console.log(formData);
+  const handleCancle = () => {
+    setOpenAddMenu(false);
+    setAddProject(false);
+    setEditTaskId(false);
+    setEditProjectId(false);
+  };
+
+  const handleTaskSubmit = (formData) => {
+    if (editTaskId) {
+    } else {
+      taskPresenters.createTask(formData, projects, setProjects);
+      setOpenAddMenu(false);
+      setAddProject(false);
+      setProject({});
+    }
+  };
+
+  const handleEditProject = (projectData) => {
+    setEditProjectId(projectData._id);
+    setProject(projectData);
+    setOpenAddMenu(true);
+    setAddProject(true);
+  };
+
+  const handleProjectSubmit = (formData) => {
+    if (editProjectId) {
+      projectsPresenters.updateProject(
+        editProjectId,
+        formData,
+        projects,
+        setProjects,
+      );
+      setAddProject(false);
+      setProject({});
+      setEditProjectId(null);
+      setOpenAddMenu(false);
+    } else {
+      projectsPresenters.createProject(formData, projects, setProjects);
+      setAddProject(false);
+      setOpenAddMenu(false);
+    }
+  };
+
+  const handleDeleteTask = (id) => {
+    taskPresenters.deletetask(id, projects, setProjects);
+  };
 
   if (!authData) {
     return (
@@ -49,25 +120,40 @@ function HomePage() {
         handleTaskAdd={handleTaskAdd}
       />
 
-      {openAddMenu && addProject ? (
-        <AddEntityForm
-          handleSubmit={handleTaskSubmit}
-          editTaskId={editTaskId}
-          handleCancle={handleTaskCancle}
-          task={task}
-          formDataFields={taskFormFields.addTaskFields}
-          formDataButtons={taskFormFields.addTaskButtons}
-        />
-      ) : (
-        <AddEntityForm
-          handleSubmit={handleProjectSubmit}
-          editTaskId={editProjectId}
-          handleCancle={handleProjectCancle}
-          task={project}
-          formDataFields={projectFormFields.addTaskFields}
-          formDataButtons={projectFormFields.addTaskButtons}
-        />
-      )}
+      <TaskShownComponents
+        task={tasks}
+        project={projects}
+        handleEditProject={handleEditProject}
+        handleDeleteTask={handleDeleteTask}
+      />
+
+      {openAddMenu &&
+        (addProject ? (
+          <AddEntityForm
+            handleSubmit={handleProjectSubmit}
+            editEntityId={editProjectId}
+            handleCancle={handleCancle}
+            entity={project}
+            formDataFields={projectFormFields.addProjectFields(
+              editProjectId,
+              project,
+            )}
+            formDataButtons={projectFormFields.addProjectButtons}
+          />
+        ) : (
+          <AddEntityForm
+            handleSubmit={handleTaskSubmit}
+            editEntityId={editTaskId}
+            handleCancle={handleCancle}
+            entity={task}
+            formDataFields={taskFormFields.addTaskFields(
+              editTaskId,
+              task,
+              projectOptions,
+            )}
+            formDataButtons={taskFormFields.addTaskButtons}
+          />
+        ))}
     </div>
   );
 }

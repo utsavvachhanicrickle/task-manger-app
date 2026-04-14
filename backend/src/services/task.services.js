@@ -1,14 +1,27 @@
-import Task from "../models/Task.js";
-import { MESSAGES } from "../utils/messages/index.js";
-import AppError from "../utils/AppError.js";
+import Task from "../modules/Task.modules.js";
 import { TaskValidation } from "../utils/validations/TaskValidation.js";
 import { AuthValidation } from "../utils/validations/AuthValidtion.js";
+import mongoose from "mongoose";
 
 export const taskServices = {
-  createTask: async (data, userId) => {
-    AuthValidation.userExistes(userId);
+  createTaskService: async (data, userId) => {
+    AuthValidation.userExists(userId);
     TaskValidation.notExistesData(data);
-    const { title, desc, expiredAt, status, category, priority, phase } = data;
+    const {
+      title,
+      desc,
+      expiredAt,
+      status,
+      category,
+      priority,
+      phase,
+      projectId,
+    } = data;
+
+    console.log(data);
+    if (!mongoose.Types.ObjectId.isValid(projectId)) {
+      console.log("Invalid project ID");
+    }
     const newTask = await Task.create({
       title,
       desc,
@@ -18,10 +31,11 @@ export const taskServices = {
       priority,
       phase,
       userId,
+      projectId: new mongoose.Types.ObjectId(projectId),
     });
     return newTask;
   },
-  updateTask: async (data, _id, userId) => {
+  updateTaskService: async (data, _id, userId) => {
     const { title, desc, status, category, priority, phase, expiredAt } = data;
     TaskValidation.notExistesData(data);
     const existingTask = await Task.findById(_id);
@@ -44,15 +58,11 @@ export const taskServices = {
     });
     return updatedTask;
   },
-  deleteTask: async (_id, userId) => {
+  deleteTaskService: async (_id, userId) => {
     const existingTask = await Task.findById(_id);
     TaskValidation.taskExistes(existingTask);
-    TaskValidation.accessChecking(existingTask.userId, userId);
+    AuthValidation.accessChecking(existingTask.userId, userId);
     await Task.deleteOne({ _id });
-  },
-  getUserTask: async (userId) => {
-    AuthValidation.userExistes(userId);
-    const tasks = await Task.find({ userId: userId });
-    return tasks;
+    return existingTask
   },
 };

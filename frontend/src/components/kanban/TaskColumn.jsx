@@ -1,28 +1,68 @@
 import { useDroppable } from "@dnd-kit/core";
 import TaskCard from "./TaskCard";
+import Button from "../Button";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
-function TaskColumn({ title, desc, tasks, projectId }) {
+function TaskColumn({
+  title,
+  desc,
+  tasks,
+  project,
+  projectId,
+  handleDeleteTask,
+  handleEditProject,
+}) {
   const { setNodeRef, isOver } = useDroppable({
-    id: projectId, 
+    id: projectId,
   });
-
   return (
     <div
       ref={setNodeRef}
       className={`w-80 min-h-75 p-3 rounded-xl border flex flex-col
       ${isOver ? "bg-blue-50 border-blue-400" : "bg-(--bg-secondary)"}`}
     >
-      <div className="mb-3">
-        <h2 className="font-semibold text-(--text-primary)">
-          {title}
-        </h2>
-        <p className="text-xs text-(--text-muted)">{desc}</p>
+      <div className="mb-3 flex items-start justify-between gap-3">
+        <div className="flex flex-col">
+          <h2 className="font-semibold text-base text-(--text-primary) leading-snug">
+            {title}
+          </h2>
+
+          <p className="text-xs text-(--text-muted) mt-1 line-clamp-2">
+            {desc}
+          </p>
+        </div>
+
+        <div
+          className="flex items-center gap-2 shrink-0"
+          onPointerDown={(e) => e.stopPropagation()}
+        >
+          <Button
+            variant="other"
+            className="h-8 w-8 p-0 flex items-center justify-center rounded-md hover:bg-(--btn-outline-hover) transition"
+            onClick={() => handleEditProject(project)}
+          >
+            <EditIcon fontSize="small" />
+          </Button>
+
+          <Button
+            variant="other"
+            className="h-8 w-8 p-0 flex items-center justify-center rounded-md hover:bg-red-500 transition"
+            onClick={() => console.log("Click delete")}
+          >
+            <DeleteIcon fontSize="small" />
+          </Button>
+        </div>
       </div>
 
       <div className="flex flex-col gap-2 flex-1">
         {tasks.length > 0 ? (
           tasks.map((task) => (
-            <TaskCard key={task._id.$oid} task={task} />
+            <TaskCard
+              key={task._id}
+              task={task}
+              handleDeleteTask={handleDeleteTask}
+            />
           ))
         ) : (
           <div className="flex items-center justify-center h-full text-sm text-(--text-muted) border border-dashed rounded-lg">

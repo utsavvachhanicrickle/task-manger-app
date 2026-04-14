@@ -30,9 +30,4 @@ export const TaskValidation = {
   taskExistes: (existingTask) => {
     if (!existingTask) throw new AppError(MESSAGES.TASK_NOT_EXISTES, 404);
   },
-  accessChecking: (existingUserId, userId) => {
-    if (existingUserId.toString() !== userId) {
-      throw new AppError(MESSAGES.ACCESS_DENIED, 401);
-    }
-  },
 };

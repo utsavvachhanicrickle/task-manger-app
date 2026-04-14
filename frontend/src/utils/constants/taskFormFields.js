@@ -1,6 +1,7 @@
 import { buttonVariants, Task, buttonInputTypes } from "../schema";
+
 export const taskFormFields = {
-  addTaskFields: (editTaskId, task) => [
+  addTaskFields: (editTaskId, task, projectOptions) => [
     {
       type: buttonInputTypes.TEXT,
       name: "title",
@@ -14,6 +15,13 @@ export const taskFormFields = {
       placeholder: "Enter Description",
       value: editTaskId ? task.desc : "",
       required: true,
+    },
+    {
+      type: buttonInputTypes.SELECT,
+      name: "projectId",
+      placeholder: "select the project",
+      value: editTaskId ? task.projectId : "",
+      options: projectOptions,
     },
     {
       type: buttonInputTypes.SELECT,

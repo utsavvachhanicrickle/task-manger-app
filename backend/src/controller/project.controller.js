@@ -1,0 +1,63 @@
+import { MESSAGES } from "../utils/messages/index.js";
+import { projectServices } from "../services/project.services.js";
+
+export const projectController = {
+  createProjectControoler: async (req, res) => {
+    try {
+      const data = await projectServices.createProjectService(
+        req.body,
+        req.userId,
+      );
+      return res
+        .status(201)
+        .json({ message: MESSAGES.PROJECT_CREATED, project: data });
+    } catch (error) {
+      console.log(error);
+      return res.status(error.statusCode || 500).json({
+        message: error.message || MESSAGES.SOMETHING_WRONG,
+      });
+    }
+  },
+  updateProjectController: async (req, res) => {
+    try {
+      const data = await projectServices.updateProjectService(
+        req.body,
+        req.params.id,
+        req.userId,
+      );
+      return res.status(200).json({
+        message: MESSAGES.PROJECT_UPDATED,
+        project: data,
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(error.statusCode || 500).json({
+        message: error.message || MESSAGES.SOMETHING_WRONG,
+      });
+    }
+  },
+  deleteProjectController: async (req, res) => {
+    try {
+      await projectServices.deleteProjectService(req.params, req.userId);
+      return res.status(201).json({ message: MESSAGES.deleteProject });
+    } catch (error) {
+      console.log(error);
+      return res.status(error.statusCode || 500).json({
+        message: error.message || MESSAGES.SOMETHING_WRONG,
+      });
+    }
+  },
+  fetchProjectController: async (req, res) => {
+    try {
+      const data = await projectServices.fetchProjectService(req.userId);
+      return res
+        .status(200)
+        .json({ message: MESSAGES.FETCHED_SUCCESSFULY, project: data });
+    } catch (error) {
+      console.log(error);
+      return res.status(error.statusCode || 500).json({
+        message: error.message || MESSAGES.SOMETHING_WRONG,
+      });
+    }
+  },
+};
