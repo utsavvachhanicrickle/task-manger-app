@@ -23,14 +23,12 @@ function TaskModal({ task, onClose, onEdit, onDelete }) {
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* TITLE */}
         <h2 className="text-xl font-bold mb-2">{task.title}</h2>
 
         <p className="text-sm mb-4" style={{ color: "var(--text-secondary)" }}>
           {task.desc}
         </p>
 
-        {/* TAGS */}
         <div className="flex flex-wrap gap-2 mb-4">
           <span
             className={`px-2 py-1 text-xs text-white rounded ${getTaskSchemaColor(
@@ -69,7 +67,6 @@ function TaskModal({ task, onClose, onEdit, onDelete }) {
           </span>
         </div>
 
-        {/* DATES */}
         <div
           className="text-xs flex flex-col gap-1"
           style={{ color: "var(--text-muted)" }}
@@ -78,7 +75,6 @@ function TaskModal({ task, onClose, onEdit, onDelete }) {
           <p>🔄 Updated: {new Date(task.updatedAt).toLocaleString()}</p>
         </div>
 
-        {/* ACTIONS */}
         <div className="flex justify-end gap-2 mt-5 flex-wrap">
           <Button
             onClick={() => {

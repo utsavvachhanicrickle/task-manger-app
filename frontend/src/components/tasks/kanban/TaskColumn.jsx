@@ -59,9 +59,8 @@ function TaskColumn({
 
       <div className="flex flex-col gap-2 flex-1 overflow-y-auto pr-1">
         {tasks.length > 0 ? (
-          tasks.map((task, index) => (
+          tasks.map((task) => (
             <TaskCard
-              index={index}
               key={task._id}
               task={task}
               handleEditTask={handleEditTask}

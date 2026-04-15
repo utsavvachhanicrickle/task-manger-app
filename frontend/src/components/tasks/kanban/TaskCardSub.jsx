@@ -2,7 +2,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import Button from "../../Button";
 import { getTaskSchemaColor } from "../../../utils/schema";
 
-function TaskCardSub({ task, index, onOpen }) {
+function TaskCardSub({ task, onOpen }) {
   const isExpired = task.expiredAt && new Date(task.expiredAt) < new Date();
 
   return (
@@ -17,8 +17,7 @@ function TaskCardSub({ task, index, onOpen }) {
         color: "var(--text-primary)",
       }}
     >
-
-      <div className="p-4 flex flex-col gap-3 bg-(--bg-primary) rounded-xl">
+      <div className="p-4 min-h-40 flex flex-col gap-3 bg-(--bg-primary) rounded-xl">
         <div className="flex justify-between items-start gap-2 ">
           <div>
             <h2 className="font-semibold text-sm sm:text-base wrap-break-word">

@@ -1,6 +1,7 @@
-import { DndContext, closestCenter } from "@dnd-kit/core";
+import { DndContext, closestCenter, DragOverlay } from "@dnd-kit/core";
 import { useKanbanDnd } from "./useKanbanDnd";
 import TaskColumn from "./TaskColumn";
+import TaskCardSub from "./TaskCardSub";
 
 function TaskShownComponents({
   task = [],
@@ -10,18 +11,35 @@ function TaskShownComponents({
   handleEditProject,
   handleDeleteProject,
 }) {
-  const { tasks, handleDragEnd } = useKanbanDnd({ initialTasks: task || [] });
-  const groupedTasks = tasks.reduce((acc, t) => {
-    if (!t || !t.projectId) return acc; 
+  const { tasks, handleDragEnd, activeTask, setActiveTask } = useKanbanDnd({
+    initialTasks: task || [],
+  });
+  const groupedTasks = (tasks || []).reduce((acc, t) => {
+    if (!t?.projectId) return acc;
+
     const key = String(t.projectId);
+
     if (!acc[key]) acc[key] = [];
+
     acc[key].push(t);
+
     return acc;
   }, {});
 
   return (
-    <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCenter}>
-      <div className="flex gap-4 overflow-x-auto p-4">
+    <DndContext
+      collisionDetection={closestCenter}
+      onDragStart={(event) => {
+        const active = tasks.find((t) => t._id === event.active.id);
+        setActiveTask(active);
+      }}
+      onDragEnd={(event) => {
+        handleDragEnd(event);
+        setActiveTask(null);
+      }}
+      onDragCancel={() => setActiveTask(null)}
+    >
+      <div className="flex gap-4 overflow-x-auto flex-nowrap p-4">
         {project.map((proj) => {
           const projectId = String(proj._id);
           const projectTasks = groupedTasks[projectId] || [];
@@ -42,6 +60,13 @@ function TaskShownComponents({
           );
         })}
       </div>
+      <DragOverlay>
+        {activeTask ? (
+          <div className="pointer-events-none rotate-2 scale-105 shadow-2xl">
+            <TaskCardSub task={activeTask} />
+          </div>
+        ) : null}
+      </DragOverlay>
     </DndContext>
   );
 }

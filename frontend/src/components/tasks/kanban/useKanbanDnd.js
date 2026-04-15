@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 
-export function useKanbanDnd({initialTasks}) {
+export function useKanbanDnd({ initialTasks }) {
   const [tasks, setTasks] = useState(initialTasks);
+  const [activeTask, setActiveTask] = useState(null);
 
   useEffect(() => {
-    setTasks(initialTasks); 
+    setTasks(initialTasks);
   }, [initialTasks]);
 
   const handleDragEnd = (event) => {
@@ -16,23 +17,19 @@ export function useKanbanDnd({initialTasks}) {
     const overId = over.id;
 
     setTasks((prev) => {
-      const activeTask = prev.find(
-        (t) => t._id === activeId
-      );
+      const activeTask = prev.find((t) => t._id === activeId);
 
       if (!activeTask) return prev;
 
       // 🔥 CASE 1: dropped on COLUMN (EMPTY or NOT EMPTY)
-      const isColumnDrop = prev.every(
-        (t) => t._id !== overId
-      );
+      const isColumnDrop = prev.every((t) => t._id !== overId);
 
       if (isColumnDrop) {
         return prev.map((t) => {
           if (t._id === activeId) {
             return {
               ...t,
-              projectId: overId , // 👈 move to column
+              projectId: overId, // 👈 move to column
             };
           }
           return t;
@@ -40,9 +37,7 @@ export function useKanbanDnd({initialTasks}) {
       }
 
       // 🔥 CASE 2: dropped on another TASK
-      const overTask = prev.find(
-        (t) => t._id === overId
-      );
+      const overTask = prev.find((t) => t._id === overId);
 
       if (overTask) {
         return prev.map((t) => {
@@ -64,5 +59,7 @@ export function useKanbanDnd({initialTasks}) {
     tasks,
     setTasks,
     handleDragEnd,
+    activeTask,
+    setActiveTask,
   };
 }
