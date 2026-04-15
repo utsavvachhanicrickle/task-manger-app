@@ -1,7 +1,7 @@
-import Task from "../modules/Task.modules.js";
-import { TaskValidation } from "../utils/validations/TaskValidation.js";
-import { AuthValidation } from "../utils/validations/AuthValidtion.js";
 import mongoose from "mongoose";
+import Task from "../modules/Task.modules.js";
+import { TaskValidation } from "../validations/TaskValidation.js";
+import { AuthValidation } from "../validations/AuthValidtion.js";
 
 export const taskServices = {
   createTaskService: async (data, userId) => {

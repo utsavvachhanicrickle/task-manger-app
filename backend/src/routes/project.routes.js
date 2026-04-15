@@ -5,25 +5,17 @@ import { projectController } from "../controller/project.controller.js";
 
 const router = express.Router();
 
-router.post(
-  APIENDPOINTS.PROJECT.CREATEPROJECT,
-  authMiddleware,
-  projectController.createProjectControoler,
-);
+router.post("/add", authMiddleware, projectController.createProjectControoler);
 router.put(
-  `${APIENDPOINTS.PROJECT.UPDATEPRJECT}:id`,
+  `/update/:id`,
   authMiddleware,
   projectController.updateProjectController,
 );
 router.delete(
-  `${APIENDPOINTS.PROJECT.DELETEPROJECT}:id`,
+  `/delete/:id`,
   authMiddleware,
   projectController.deleteProjectController,
 );
-router.get(
-  APIENDPOINTS.PROJECT.FETCHDATA,
-  authMiddleware,
-  projectController.fetchProjectController,
-);
+router.get("/fetch", authMiddleware, projectController.fetchProjectController);
 
 export default router;

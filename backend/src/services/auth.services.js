@@ -9,7 +9,7 @@ import {
 } from "../utils/token.js";
 import { setCookies, clearAuthCookies } from "../utils/cookies.js";
 import { COOKIESSCHEMA } from "../utils/schema/index.js";
-import { AuthValidation } from "../utils/validations/AuthValidtion.js";
+import { AuthValidation } from "../validations/AuthValidtion.js";
 
 export const authServices = {
   signUp: async (data) => {

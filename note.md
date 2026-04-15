@@ -1,48 +1,40 @@
-{message: 'Task Added Successfuly', task: {…}}
-message
-:
-"Task Added Successfuly"
-task
-:
-category
-:
-"development"
-createdAt
-:
-"2026-04-14T10:03:40.168Z"
-desc
-:
-"11"
-expiredAt
-:
-"2026-04-03T10:03:00.000Z"
-phase
-:
-"review"
-priority
-:
-"medium"
-projectId
-:
-"69dde5dd7b8ef8c3a9bb27e0"
-status
-:
-"completed"
-title
-:
-"56"
-updatedAt
-:
-null
-userId
-:
-"69d8c452e5736f36233caef3"
-\_\_v
-:
-0
-\_id
-:
-"69de10fc7846ed0a15081e16"
-[[Prototype]]
-:
-Object
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { SIGNIN, SIGNUP, HOME } from "./utils/route.js";
+import Navbar from "./components/Navabr.jsx";
+import Footer from "./components/Footer.jsx";
+import HomePage from "./pages/HomePage.jsx";
+import SignIn from "./pages/SignIn.jsx";
+import SignUp from "./pages/SignUp.jsx";
+import { AuthContextProvider } from "./context/authContext.jsx";
+import { DarkModeContextProvider } from "./context/darkModeContext.jsx";
+import { ProjectContextProvider } from "./context/projectCntext.jsx";
+
+function App() {
+  return (
+    <BrowserRouter>
+      <DarkModeContextProvider>
+        <AuthContextProvider>
+          <Navbar />
+          <Routes>
+            <Route
+              path={HOME}
+              element={
+                <ProjectContextProvider>
+                  <HomePage />
+                </ProjectContextProvider>
+              }
+            />
+            <Route path={SIGNIN} element={<SignIn />} />
+            <Route path={SIGNUP} element={<SignUp />} />
+          </Routes>
+        </AuthContextProvider>
+        <Footer />
+      </DarkModeContextProvider>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+
+
+this is my main routes i needs to setup the react protechtech components how to creates those

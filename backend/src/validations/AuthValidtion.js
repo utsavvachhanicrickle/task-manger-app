@@ -1,5 +1,5 @@
-import { MESSAGES } from "../messages/index.js";
-import AppError from "../AppError.js";
+import { MESSAGES } from "../utils/messages/index.js";
+import AppError from "../utils/AppError.js";
 
 export const AuthValidation = {
   userExists: (userId) => {

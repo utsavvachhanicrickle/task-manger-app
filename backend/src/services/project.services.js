@@ -1,7 +1,7 @@
 import Project from "../modules/Project.modules.js";
 import Task from "../modules/Task.modules.js";
-import { AuthValidation } from "../utils/validations/AuthValidtion.js";
-import { ProjectValidation } from "../utils/validations/ProjectValidation.js";
+import { AuthValidation } from "../validations/AuthValidtion.js";
+import { ProjectValidation } from "../validations/ProjectValidation.js";
 
 export const projectServices = {
   createProjectService: async (data, userId) => {

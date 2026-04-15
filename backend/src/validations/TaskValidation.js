@@ -1,6 +1,7 @@
-import { MESSAGES } from "../messages/index.js";
-import { Task as TaskSchema } from "../schema/index.js";
-import AppError from "../AppError.js";
+import { Task as TaskSchema } from "../utils/schema/index.js";
+import { MESSAGES } from "../utils/messages/index.js";
+import AppError from "../utils/AppError.js";
+
 
 export const TaskValidation = {
   notExistesData: (data) => {

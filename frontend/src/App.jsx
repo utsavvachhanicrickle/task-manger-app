@@ -8,6 +8,8 @@ import SignUp from "./pages/SignUp.jsx";
 import { AuthContextProvider } from "./context/authContext.jsx";
 import { DarkModeContextProvider } from "./context/darkModeContext.jsx";
 import { ProjectContextProvider } from "./context/projectCntext.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import PublicRoute from "./components/PublicRoute.jsx";
 
 function App() {
   return (
@@ -16,16 +18,21 @@ function App() {
         <AuthContextProvider>
           <Navbar />
           <Routes>
-            <Route
-              path={HOME}
-              element={
-                <ProjectContextProvider>
-                  <HomePage />
-                </ProjectContextProvider>
-              }
-            />
-            <Route path={SIGNIN} element={<SignIn />} />
-            <Route path={SIGNUP} element={<SignUp />} />
+            <Route element={<ProtectedRoute />}>
+              <Route
+                path={HOME}
+                element={
+                  <ProjectContextProvider>
+                    <HomePage />
+                  </ProjectContextProvider>
+                }
+              />
+            </Route>
+
+            <Route element={<PublicRoute />}>
+              <Route path={SIGNIN} element={<SignIn />} />
+              <Route path={SIGNUP} element={<SignUp />} />
+            </Route>
           </Routes>
         </AuthContextProvider>
         <Footer />
