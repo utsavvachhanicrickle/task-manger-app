@@ -45,6 +45,13 @@ const taskSchema = new mongoose.Schema({
   expiredAt: {
     type: Date,
   },
+
+  order: {
+    type: Number,
+    require: true,
+    index: true,
+  },
+
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",

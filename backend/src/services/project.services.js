@@ -37,12 +37,12 @@ export const projectServices = {
     AuthValidation.accessChecking(existingProject.userId, userId);
     await Project.deleteOne({ _id });
     await Task.deleteMany({ projectId: _id });
-    return existingProject
+    return existingProject;
   },
   fetchProjectService: async (userId) => {
     AuthValidation.userExists(userId);
-    const allProjects = await Project.find({ userId });
-    const allTasks = await Task.find({ userId });
+    const allProjects = await Project.find({ userId }).sort({ createdAt: -1 });
+    const allTasks = await Task.find({ userId }).sort({ order: 1 });
 
     const projectsDetils = allProjects.map((project) => {
       const projectTask = allTasks.filter(

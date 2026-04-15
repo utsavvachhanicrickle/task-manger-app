@@ -18,10 +18,14 @@ export const taskServices = {
       projectId,
     } = data;
 
-    console.log(data);
     if (!mongoose.Types.ObjectId.isValid(projectId)) {
       console.log("Invalid project ID");
     }
+
+    const lastTask = await Task.findOne({ projectId }).sort({ order: 1 });
+
+    const order = lastTask ? lastTask.order - 1000 : 100000;
+
     const newTask = await Task.create({
       title,
       desc,
@@ -31,6 +35,7 @@ export const taskServices = {
       priority,
       phase,
       userId,
+      order,
       projectId: new mongoose.Types.ObjectId(projectId),
     });
     return newTask;
@@ -63,6 +68,6 @@ export const taskServices = {
     TaskValidation.taskExistes(existingTask);
     AuthValidation.accessChecking(existingTask.userId, userId);
     await Task.deleteOne({ _id });
-    return existingTask
+    return existingTask;
   },
 };

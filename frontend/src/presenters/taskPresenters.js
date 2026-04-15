@@ -10,7 +10,7 @@ export const taskPresenters = {
         projects.map((project) => {
           if (project._id !== data.task.projectId) return project;
           else {
-            return { ...project, tasks: [...(project.tasks || []), data.task] };
+            return { ...project, tasks: [data.task, ...(project.tasks || [])] };
           }
         }),
       );
@@ -53,8 +53,6 @@ export const taskPresenters = {
         }),
       );
       toast.success(MESSAGES.TASK_UPDATED);
-      console.log(projects);
-
       return { success: true };
     } catch (error) {
       console.log(error);

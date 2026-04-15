@@ -6,7 +6,7 @@ export const projectsPresenters = {
   createProject: async (formData, projects, setProjects) => {
     try {
       const { data } = await projectModules.createProject(formData);
-      setProjects((projects) => [...projects, data.project]);
+      setProjects((projects) => [data.project, ...projects]);
       toast.success(MESSAGES.PROJECT_ADD);
       return { success: true };
     } catch (error) {
