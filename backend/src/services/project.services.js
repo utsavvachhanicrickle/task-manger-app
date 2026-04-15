@@ -37,6 +37,7 @@ export const projectServices = {
     AuthValidation.accessChecking(existingProject.userId, userId);
     await Project.deleteOne({ _id });
     await Task.deleteMany({ projectId: _id });
+    return existingProject
   },
   fetchProjectService: async (userId) => {
     AuthValidation.userExists(userId);

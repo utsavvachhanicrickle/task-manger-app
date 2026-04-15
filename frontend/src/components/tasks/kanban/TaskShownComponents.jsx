@@ -6,17 +6,19 @@ function TaskShownComponents({
   task = [],
   project = [],
   handleDeleteTask,
+  handleEditTask,
   handleEditProject,
-  handleEditTask
+  handleDeleteProject,
 }) {
-  const { tasks, handleDragEnd } = useKanbanDnd({ initialTasks: task });
-
+  const { tasks, handleDragEnd } = useKanbanDnd({ initialTasks: task || [] });
   const groupedTasks = tasks.reduce((acc, t) => {
+    if (!t || !t.projectId) return acc; 
     const key = String(t.projectId);
     if (!acc[key]) acc[key] = [];
     acc[key].push(t);
     return acc;
   }, {});
+
   return (
     <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCenter}>
       <div className="flex gap-4 overflow-x-auto p-4">
@@ -32,9 +34,10 @@ function TaskShownComponents({
               projectId={projectId}
               project={proj}
               tasks={projectTasks}
-              handleDeleteTask={handleDeleteTask}
               handleEditTask={handleEditTask}
+              handleDeleteTask={handleDeleteTask}
               handleEditProject={handleEditProject}
+              handleDeleteProject={handleDeleteProject}
             />
           );
         })}

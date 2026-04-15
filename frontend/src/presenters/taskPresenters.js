@@ -6,8 +6,6 @@ export const taskPresenters = {
   createTask: async (formData, projects, setProjects) => {
     try {
       const { data } = await taskModules.createTask(formData);
-      console.log(projects);
-
       setProjects(
         projects.map((project) => {
           if (project._id !== data.task.projectId) return project;
@@ -34,29 +32,28 @@ export const taskPresenters = {
           else {
             return {
               ...project,
-              tasks: [
-                tasks.map((task) => {
-                  if (task._id !== data.task._id) return task;
-                  else {
-                    return {
-                      ...task,
-                      title: data.task.title,
-                      desc: data.task.desc,
-                      updatedAt: data.task.updatedAt,
-                      status: data.task.status,
-                      category: data.task.category,
-                      priority: data.task.priority,
-                      phase: data.task.phase,
-                      expiredAt: data.task.expiredAt,
-                    };
-                  }
-                }),
-              ],
+              tasks: project.tasks.map((task) => {
+                if (task._id !== data.task._id) return task;
+                else {
+                  return {
+                    ...task,
+                    title: data.task.title,
+                    desc: data.task.desc,
+                    updatedAt: data.task.updatedAt,
+                    status: data.task.status,
+                    category: data.task.category,
+                    priority: data.task.priority,
+                    phase: data.task.phase,
+                    expiredAt: data.task.expiredAt,
+                  };
+                }
+              }),
             };
           }
         }),
       );
       toast.success(MESSAGES.TASK_UPDATED);
+      console.log(projects);
 
       return { success: true };
     } catch (error) {

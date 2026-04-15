@@ -38,8 +38,13 @@ export const projectController = {
   },
   deleteProjectController: async (req, res) => {
     try {
-      await projectServices.deleteProjectService(req.params, req.userId);
-      return res.status(201).json({ message: MESSAGES.deleteProject });
+      const data = await projectServices.deleteProjectService(
+        req.params.id,
+        req.userId,
+      );
+      return res
+        .status(201)
+        .json({ message: MESSAGES.deleteProject, project: data });
     } catch (error) {
       console.log(error);
       return res.status(error.statusCode || 500).json({

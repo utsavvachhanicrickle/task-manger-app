@@ -108,6 +108,9 @@ function HomePage() {
   const handleDeleteTask = (id) => {
     taskPresenters.deletetask(id, projects, setProjects);
   };
+  const handleDeleteProject = (id) => {
+    projectsPresenters.deleteProject(id, projects, setProjects);
+  };
 
   if (!authData) {
     return (
@@ -134,9 +137,10 @@ function HomePage() {
       <TaskShownComponents
         task={tasks}
         project={projects}
-        handleEditProject={handleEditProject}
         handleDeleteTask={handleDeleteTask}
         handleEditTask={handleEditTask}
+        handleEditProject={handleEditProject}
+        handleDeleteProject={handleDeleteProject}
       />
 
       {openAddMenu &&

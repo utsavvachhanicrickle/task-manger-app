@@ -10,6 +10,6 @@ export const APIENDPOINTS = {
 
   CREATEPROJECT: "/project/add",
   UPDATEPROJECT: "/project/update/",
-  DELETEPROJECT: "/project/delete",
+  DELETEPROJECT: "/project/delete/",
   GETPROJECT: "/project/fetch"
 };

@@ -9,7 +9,7 @@ function TaskCardSub({ task, index, onOpen }) {
     <div
       className={`
         rounded-xl flex flex-col gap-3 border transition-all duration-300
-        hover:shadow-lg
+        hover:shadow-lg 
         ${isExpired ? "border-red-500" : "border-(--border)"}
       `}
       style={{
@@ -17,10 +17,9 @@ function TaskCardSub({ task, index, onOpen }) {
         color: "var(--text-primary)",
       }}
     >
-      <div className={`h-1 w-full rounded-t-xl `} />
 
-      <div className="p-4 flex flex-col gap-3">
-        <div className="flex justify-between items-start gap-2">
+      <div className="p-4 flex flex-col gap-3 bg-(--bg-primary) rounded-xl">
+        <div className="flex justify-between items-start gap-2 ">
           <div>
             <h2 className="font-semibold text-sm sm:text-base wrap-break-word">
               {task.title}

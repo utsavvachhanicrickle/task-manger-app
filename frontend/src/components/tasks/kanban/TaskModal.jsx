@@ -81,7 +81,10 @@ function TaskModal({ task, onClose, onEdit, onDelete }) {
         {/* ACTIONS */}
         <div className="flex justify-end gap-2 mt-5 flex-wrap">
           <Button
-            onClick={() => onEdit(task)}
+            onClick={() => {
+              onEdit(task);
+              onClose();
+            }}
             className="flex items-center gap-1"
           >
             <EditIcon fontSize="small" />

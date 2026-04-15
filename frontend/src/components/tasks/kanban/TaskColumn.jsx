@@ -10,9 +10,10 @@ function TaskColumn({
   tasks,
   project,
   projectId,
+  handleEditTask,
   handleDeleteTask,
   handleEditProject,
-  handleEditTask
+  handleDeleteProject,
 }) {
   const { setNodeRef, isOver } = useDroppable({
     id: projectId,
@@ -20,7 +21,7 @@ function TaskColumn({
   return (
     <div
       ref={setNodeRef}
-      className={`w-80 min-h-75 p-3 rounded-xl border flex flex-col
+      className={`w-80 h-[70vh] p-3 shrink-0 rounded-xl border flex flex-col overflow-hidden
       ${isOver ? "bg-blue-50 border-blue-400" : "bg-(--bg-secondary)"}`}
     >
       <div className="mb-3 flex items-start justify-between gap-3">
@@ -49,14 +50,14 @@ function TaskColumn({
           <Button
             variant="other"
             className="h-8 w-8 p-0 flex items-center justify-center rounded-md hover:bg-red-500 transition"
-            onClick={() => console.log("Click delete")}
+            onClick={() => handleDeleteProject(project._id)}
           >
             <DeleteIcon fontSize="small" />
           </Button>
         </div>
       </div>
 
-      <div className="flex flex-col gap-2 flex-1">
+      <div className="flex flex-col gap-2 flex-1 overflow-y-auto pr-1">
         {tasks.length > 0 ? (
           tasks.map((task, index) => (
             <TaskCard
