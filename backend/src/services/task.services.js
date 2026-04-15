@@ -41,7 +41,7 @@ export const taskServices = {
     const existingTask = await Task.findById(_id);
 
     TaskValidation.taskExistes(existingTask);
-    TaskValidation.accessChecking(existingTask.userId, userId);
+    AuthValidation.accessChecking(existingTask.userId, userId);
 
     const updateData = { updatedAt: new Date() };
 

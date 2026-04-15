@@ -1,4 +1,4 @@
-import { buttonVariants, Task, buttonInputTypes } from "../schema";
+import { buttonVariants, TaskSchema, buttonInputTypes } from "../schema";
 
 export const taskFormFields = {
   addTaskFields: (editTaskId, task, projectOptions) => [
@@ -28,28 +28,28 @@ export const taskFormFields = {
       name: "status",
       placeholder: "select the status",
       value: editTaskId ? task.status : "",
-      options: Task.statusBar,
+      options: TaskSchema.statusBar,
     },
     {
       type: buttonInputTypes.SELECT,
       name: "category",
       placeholder: "select the category",
       value: editTaskId ? task.category : "",
-      options: Task.categoryBar,
+      options: TaskSchema.categoryBar,
     },
     {
       type: buttonInputTypes.SELECT,
       name: "priority",
       placeholder: "select the priority",
       value: editTaskId ? task.priority : "",
-      options: Task.priorityBar,
+      options: TaskSchema.priorityBar,
     },
     {
       type: buttonInputTypes.SELECT,
       name: "phase",
       placeholder: "select the phase",
       value: editTaskId ? task.phase : "",
-      options: Task.phaseBar,
+      options: TaskSchema.phaseBar,
     },
     {
       type: buttonInputTypes.DATETIME_LOCAL,
@@ -77,28 +77,28 @@ export const taskFormFields = {
       name: "status",
       placeholder: "select the status",
       value: "",
-      options: Task.statusBar,
+      options: TaskSchema.statusBar,
     },
     {
       type: buttonInputTypes.SELECT,
       name: "category",
       placeholder: "select the category",
       value: "",
-      options: Task.categoryBar,
+      options: TaskSchema.categoryBar,
     },
     {
       type: buttonInputTypes.SELECT,
       name: "priority",
       placeholder: "select the priority",
       value: "",
-      options: Task.priorityBar,
+      options: TaskSchema.priorityBar,
     },
     {
       type: buttonInputTypes.SELECT,
       name: "phase",
       placeholder: "select the phase",
       value: "",
-      options: Task.phaseBar,
+      options: TaskSchema.phaseBar,
     },
   ],
 };

@@ -11,7 +11,7 @@ import AddEntityForm from "../components/tasks/AddEntityForm";
 import { taskFormFields } from "../utils/constants/taskFormFields";
 import { taskPresenters } from "../presenters/taskPresenters";
 import { projectFormFields } from "../utils/constants/projectFormFields";
-import TaskShownComponents from "../components/kanban/TaskShownComponents";
+import TaskShownComponents from "../components/tasks/kanban/TaskShownComponents";
 
 function HomePage() {
   const navigate = useNavigate();
@@ -60,6 +60,10 @@ function HomePage() {
 
   const handleTaskSubmit = (formData) => {
     if (editTaskId) {
+      taskPresenters.updatetask(editTaskId, formData, projects, setProjects);
+      setEditTaskId(false);
+      setTask({});
+      setOpenAddMenu(false);
     } else {
       taskPresenters.createTask(formData, projects, setProjects);
       setOpenAddMenu(false);
@@ -68,11 +72,18 @@ function HomePage() {
     }
   };
 
+  const handleEditTask = (task) => {
+    setEditTaskId(task._id);
+    setTask(task);
+    setAddProject(false);
+    setOpenAddMenu(true);
+  };
+
   const handleEditProject = (projectData) => {
     setEditProjectId(projectData._id);
     setProject(projectData);
-    setOpenAddMenu(true);
     setAddProject(true);
+    setOpenAddMenu(true);
   };
 
   const handleProjectSubmit = (formData) => {
@@ -125,6 +136,7 @@ function HomePage() {
         project={projects}
         handleEditProject={handleEditProject}
         handleDeleteTask={handleDeleteTask}
+        handleEditTask={handleEditTask}
       />
 
       {openAddMenu &&

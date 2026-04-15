@@ -7,6 +7,7 @@ function TaskShownComponents({
   project = [],
   handleDeleteTask,
   handleEditProject,
+  handleEditTask
 }) {
   const { tasks, handleDragEnd } = useKanbanDnd({ initialTasks: task });
 
@@ -32,6 +33,7 @@ function TaskShownComponents({
               project={proj}
               tasks={projectTasks}
               handleDeleteTask={handleDeleteTask}
+              handleEditTask={handleEditTask}
               handleEditProject={handleEditProject}
             />
           );

@@ -25,10 +25,37 @@ export const taskPresenters = {
       return { success: false };
     }
   },
-  updatetask: async (id, formData, setProjects) => {
+  updatetask: async (id, formData, projects, setProjects) => {
     try {
       const { data } = await taskModules.updateTask(id, formData);
-      setProjects(data.projects);
+      setProjects(
+        projects.map((project) => {
+          if (project._id !== data.task.projectId) return project;
+          else {
+            return {
+              ...project,
+              tasks: [
+                tasks.map((task) => {
+                  if (task._id !== data.task._id) return task;
+                  else {
+                    return {
+                      ...task,
+                      title: data.task.title,
+                      desc: data.task.desc,
+                      updatedAt: data.task.updatedAt,
+                      status: data.task.status,
+                      category: data.task.category,
+                      priority: data.task.priority,
+                      phase: data.task.phase,
+                      expiredAt: data.task.expiredAt,
+                    };
+                  }
+                }),
+              ],
+            };
+          }
+        }),
+      );
       toast.success(MESSAGES.TASK_UPDATED);
 
       return { success: true };

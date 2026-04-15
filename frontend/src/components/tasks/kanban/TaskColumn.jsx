@@ -1,6 +1,6 @@
 import { useDroppable } from "@dnd-kit/core";
 import TaskCard from "./TaskCard";
-import Button from "../Button";
+import Button from "../../Button";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
@@ -12,6 +12,7 @@ function TaskColumn({
   projectId,
   handleDeleteTask,
   handleEditProject,
+  handleEditTask
 }) {
   const { setNodeRef, isOver } = useDroppable({
     id: projectId,
@@ -57,10 +58,12 @@ function TaskColumn({
 
       <div className="flex flex-col gap-2 flex-1">
         {tasks.length > 0 ? (
-          tasks.map((task) => (
+          tasks.map((task, index) => (
             <TaskCard
+              index={index}
               key={task._id}
               task={task}
+              handleEditTask={handleEditTask}
               handleDeleteTask={handleDeleteTask}
             />
           ))
