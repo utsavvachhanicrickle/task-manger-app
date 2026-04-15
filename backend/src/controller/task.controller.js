@@ -34,9 +34,30 @@ export const taskController = {
 
   deleteTask: async (req, res) => {
     try {
-      const task = await taskServices.deleteTaskService(req.params.id, req.userId);
-      return res.status(200).json({ message: MESSAGES.TASK_DELETE, task: task });
+      const task = await taskServices.deleteTaskService(
+        req.params.id,
+        req.userId,
+      );
+      return res
+        .status(200)
+        .json({ message: MESSAGES.TASK_DELETE, task: task });
     } catch (error) {
+      return res.status(error.statusCode || 500).json({
+        message: error.message || MESSAGES.SOMETHING_WRONG,
+      });
+    }
+  },
+
+  dargeAndDrop: async (req, res) => {
+    try {
+      const task = await taskServices.dargeAndDrop(req.body, req.userId);
+      // console.log(task);
+
+      return res
+        .status(200)
+        .json({ message: MESSAGES.DRAP_AND_DROP_DONE, task: task });
+    } catch (error) {
+      console.log(error)
       return res.status(error.statusCode || 500).json({
         message: error.message || MESSAGES.SOMETHING_WRONG,
       });

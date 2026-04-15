@@ -66,4 +66,44 @@ export const projectsPresenters = {
       return { success: false };
     }
   },
+  dargeAndDrop: async (dropData, projects, setProjects) => {
+    try {
+      const { data } = await projectModules.dargeAndDrop(dropData);
+      
+      // setProjects(
+      //   projects.map((project) => {
+      //     if (
+      //       project._id !== data.newProjectId &&
+      //       project._id !== data.pastProjectId
+      //     )
+      //       return project;
+      //     if (
+      //       project._id === data.newProjectId &&
+      //       project._id === data.pastProjectId
+      //     ) {
+      //       return {
+      //         ...project,
+      //         tasks: tasks.map((task) => {
+      //           if (task._id !== data.currentTask._id) return task;
+      //           return { ...task, order: data.order };
+      //         }),
+      //       };
+      //     }
+      //     if (project._id === data.pastProjectId)
+      //       return {
+      //         ...project,
+      //         tasks: tasks.filter((task) => task._id !== currentTask._id),
+      //       };
+      //     if (project._id === data.newProjectId)
+      //       return { ...project, tasks: [...tasks, currentTask] };
+      //   }),
+      // );
+
+      return { success: true };
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response?.data?.message || MESSAGES.SOMETHING_WRONG);
+      return { success: false };
+    }
+  },
 };

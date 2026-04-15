@@ -70,4 +70,51 @@ export const taskServices = {
     await Task.deleteOne({ _id });
     return existingTask;
   },
+  dargeAndDrop: async (data, userId) => {
+    AuthValidation.userExists(userId);
+
+    const { currentTaskId, prevTaskId, nextTaskId, newProjectId } = data;
+
+    const currentTask = await Task.findById(currentTaskId);
+    if (!currentTask) throw new Error("Task not found");
+
+    const nextTask = nextTaskId ? await Task.findById(nextTaskId) : null;
+    const prevTask = prevTaskId ? await Task.findById(prevTaskId) : null;
+
+    const pastProjectId = currentTask.projectId;
+
+    let order;
+
+    // CASE 1: only item
+    if (!prevTask && !nextTask) {
+      order = 100000;
+    }
+
+    // CASE 2: at bottom
+    else if (prevTask && !nextTask) {
+      order = prevTask.order - 1000;
+    }
+
+    // CASE 3: at top
+    else if (!prevTask && nextTask) {
+      order = nextTask.order + 1000;
+    }
+
+    // CASE 4: middle
+    else {
+      order = Math.floor((prevTask.order + nextTask.order) / 2);
+    }
+
+    currentTask.order = order;
+    currentTask.projectId = newProjectId;
+
+    await currentTask.save();
+
+    return {
+      currentTask,
+      newProjectId,
+      pastProjectId,
+      order,
+    };
+  },
 };

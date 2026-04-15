@@ -7,6 +7,7 @@ export const APIENDPOINTS = {
   CREATETASK: "/task/add",
   UPDATETASK: "/task/update/",
   DELETETASK: "/task/delete/",
+  DRAPDROPTASK: "/task/dragdrop",
 
   CREATEPROJECT: "/project/add",
   UPDATEPROJECT: "/project/update/",

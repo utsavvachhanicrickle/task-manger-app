@@ -10,9 +10,11 @@ function TaskShownComponents({
   handleEditTask,
   handleEditProject,
   handleDeleteProject,
+  handleDragTask,
 }) {
   const { tasks, handleDragEnd, activeTask, setActiveTask } = useKanbanDnd({
     initialTasks: task || [],
+    handleDragTask
   });
   const groupedTasks = (tasks || []).reduce((acc, t) => {
     if (!t?.projectId) return acc;

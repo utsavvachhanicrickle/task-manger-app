@@ -112,6 +112,10 @@ function HomePage() {
     projectsPresenters.deleteProject(id, projects, setProjects);
   };
 
+  const handleDragTask = (dropData) => {
+    projectsPresenters.dargeAndDrop(dropData, projects, setProjects);
+  };
+
   if (!authData) {
     return (
       <div className="flex justify-center p-4 min-h-screen bg-(--bg)">
@@ -137,6 +141,7 @@ function HomePage() {
       <TaskShownComponents
         task={tasks}
         project={projects}
+        handleDragTask={handleDragTask}
         handleDeleteTask={handleDeleteTask}
         handleEditTask={handleEditTask}
         handleEditProject={handleEditProject}
