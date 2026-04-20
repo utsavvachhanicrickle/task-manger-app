@@ -39,6 +39,7 @@ export const projectsPresenters = {
       return { success: false };
     }
   },
+
   deleteProject: async (id, projects, setProjects) => {
     try {
       const { data } = await projectModules.deleteProject(id);
@@ -52,6 +53,7 @@ export const projectsPresenters = {
       return { success: false };
     }
   },
+  
   fetchProjects: async (shownToast, setProjects) => {
     try {
       const { data } = await projectModules.getProject();

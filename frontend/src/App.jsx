@@ -1,8 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { SIGNIN, SIGNUP, HOME } from "./utils/route.js";
+import { SIGNIN, SIGNUP, HOME, PROJECTDEATILS } from "./utils/route.js";
 import Navbar from "./components/Navabr.jsx";
 import Footer from "./components/Footer.jsx";
 import HomePage from "./pages/HomePage.jsx";
+import ProjectDeatilsPage from "./pages/ProjectDeatilsPage.jsx";
 import SignIn from "./pages/SignIn.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import { AuthContextProvider } from "./context/authContext.jsx";
@@ -24,6 +25,14 @@ function App() {
                 element={
                   <ProjectContextProvider>
                     <HomePage />
+                  </ProjectContextProvider>
+                }
+              />
+              <Route
+              path={PROJECTDEATILS}
+                element={
+                  <ProjectContextProvider>
+                    <ProjectDeatilsPage />
                   </ProjectContextProvider>
                 }
               />

@@ -73,6 +73,7 @@ function TaskModal({ task, onClose, onEdit, onDelete }) {
         >
           <p>📅 Created: {new Date(task.createdAt).toLocaleString()}</p>
           <p>🔄 Updated: {new Date(task.updatedAt).toLocaleString()}</p>
+          <p>🔄 Expired: {new Date(task.expiredAt).toLocaleString()}</p>
         </div>
 
         <div className="flex justify-end gap-2 mt-5 flex-wrap">

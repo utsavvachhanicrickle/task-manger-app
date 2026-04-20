@@ -1,17 +1,17 @@
 import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 import { ProjectContext } from "../context/projectCntext";
-import { buttonVariants } from "../utils/schema";
 import { projectsPresenters } from "../presenters/projectsPresnters";
+import { taskPresenters } from "../presenters/taskPresenters";
 import Button from "../components/Button";
-import { useNavigate } from "react-router-dom";
-import { SIGNIN } from "../utils/route";
 import TaskNavabar from "../components/tasks/TaskNavabar";
 import AddEntityForm from "../components/tasks/AddEntityForm";
-import { taskFormFields } from "../utils/constants/taskFormFields";
-import { taskPresenters } from "../presenters/taskPresenters";
-import { projectFormFields } from "../utils/constants/projectFormFields";
 import TaskShownComponents from "../components/tasks/kanban/TaskShownComponents";
+import { buttonVariants } from "../utils/schema";
+import { SIGNIN } from "../utils/route";
+import { taskFormFields } from "../utils/constants/taskFormFields";
+import { projectFormFields } from "../utils/constants/projectFormFields";
 
 function HomePage() {
   const navigate = useNavigate();
@@ -32,13 +32,6 @@ function HomePage() {
   useEffect(() => setFilterTask(tasks), [tasks]);
 
   useEffect(() => {
-    const fetProjects = async () =>
-      await projectsPresenters.fetchProjects(false, setProjects);
-
-    fetProjects();
-  }, []);
-
-  useEffect(() => {
     setProjectOptions(
       projects.map((project) => ({ label: project.title, value: project._id })),
     );
@@ -52,6 +45,7 @@ function HomePage() {
   const handleTaskAdd = () => {
     setOpenAddMenu(true);
     setAddProject(false);
+    setEditTaskId(false);
   };
 
   const handleCancle = () => {
@@ -111,8 +105,9 @@ function HomePage() {
   const handleDeleteTask = (id) => {
     taskPresenters.deletetask(id, projects, setProjects);
   };
-  const handleDeleteProject = (id) => {
-    projectsPresenters.deleteProject(id, projects, setProjects);
+
+  const handleShowProject = (id) => {
+    navigate(`/project/${id}`);
   };
 
   const handleDragTask = (dropData) => {
@@ -150,7 +145,7 @@ function HomePage() {
         handleDeleteTask={handleDeleteTask}
         handleEditTask={handleEditTask}
         handleEditProject={handleEditProject}
-        handleDeleteProject={handleDeleteProject}
+        handleShowProject={handleShowProject}
       />
 
       {openAddMenu &&

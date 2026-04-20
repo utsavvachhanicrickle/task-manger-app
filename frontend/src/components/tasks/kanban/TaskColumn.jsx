@@ -3,7 +3,7 @@ import TaskCard from "./TaskCard";
 import Button from "../../Button";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-
+import VisibilityIcon from "@mui/icons-material/Visibility";
 function TaskColumn({
   title,
   desc,
@@ -13,7 +13,7 @@ function TaskColumn({
   handleEditTask,
   handleDeleteTask,
   handleEditProject,
-  handleDeleteProject,
+  handleShowProject,
 }) {
   const { setNodeRef, isOver } = useDroppable({
     id: projectId,
@@ -46,13 +46,12 @@ function TaskColumn({
           >
             <EditIcon fontSize="small" />
           </Button>
-
           <Button
             variant="other"
             className="h-8 w-8 p-0 flex items-center justify-center rounded-md hover:bg-red-500 transition"
-            onClick={() => handleDeleteProject(project._id)}
+            onClick={() => handleShowProject(project._id)}
           >
-            <DeleteIcon fontSize="small" />
+            <VisibilityIcon fontSize="small" />
           </Button>
         </div>
       </div>

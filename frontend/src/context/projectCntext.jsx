@@ -1,18 +1,29 @@
 import { useEffect } from "react";
 import { createContext, useState } from "react";
+import { projectsPresenters } from "../presenters/projectsPresnters";
 
 export const ProjectContext = createContext();
 
 export const ProjectContextProvider = ({ children }) => {
   const [projects, setProjects] = useState([]);
   const [tasks, setTasks] = useState([]);
-  useEffect(
-    () =>
-      setTasks(
-        projects.flatMap((project) => (project?.tasks?.length != 0 ? project.tasks : [])),
+
+  useEffect(() => {
+    const loadProjects = async () => {
+      await projectsPresenters.fetchProjects(false, setProjects);
+    };
+
+    loadProjects();
+  }, []);
+
+  useEffect(() => {
+    setTasks(
+      projects.flatMap((project) =>
+        project?.tasks?.length ? project.tasks : [],
       ),
-    [projects],
-  );
+    );
+  }, [projects]);
+
   return (
     <ProjectContext.Provider value={{ projects, setProjects, tasks }}>
       {children}
