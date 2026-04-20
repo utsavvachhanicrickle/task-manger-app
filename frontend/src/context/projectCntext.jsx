@@ -1,10 +1,11 @@
+import { Outlet } from "react-router-dom";
 import { useEffect } from "react";
 import { createContext, useState } from "react";
 import { projectsPresenters } from "../presenters/projectsPresnters";
 
 export const ProjectContext = createContext();
 
-export const ProjectContextProvider = ({ children }) => {
+export const ProjectContextProvider = () => {
   const [projects, setProjects] = useState([]);
   const [tasks, setTasks] = useState([]);
 
@@ -26,7 +27,7 @@ export const ProjectContextProvider = ({ children }) => {
 
   return (
     <ProjectContext.Provider value={{ projects, setProjects, tasks }}>
-      {children}
+      <Outlet />
     </ProjectContext.Provider>
   );
 };

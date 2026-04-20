@@ -1,9 +1,16 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { SIGNIN, SIGNUP, HOME, PROJECTDEATILS } from "./utils/route.js";
+import {
+  SIGNIN,
+  SIGNUP,
+  HOME,
+  PROJECTDEATILS,
+  AICHATBOAD,
+} from "./utils/route.js";
 import Navbar from "./components/Navabr.jsx";
 import Footer from "./components/Footer.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import ProjectDeatilsPage from "./pages/ProjectDeatilsPage.jsx";
+import AIChatboadPage from "./pages/AIChatboadPage.jsx";
 import SignIn from "./pages/SignIn.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import { AuthContextProvider } from "./context/authContext.jsx";
@@ -20,22 +27,11 @@ function App() {
           <Navbar />
           <Routes>
             <Route element={<ProtectedRoute />}>
-              <Route
-                path={HOME}
-                element={
-                  <ProjectContextProvider>
-                    <HomePage />
-                  </ProjectContextProvider>
-                }
-              />
-              <Route
-              path={PROJECTDEATILS}
-                element={
-                  <ProjectContextProvider>
-                    <ProjectDeatilsPage />
-                  </ProjectContextProvider>
-                }
-              />
+              <Route element={<ProjectContextProvider />}>
+                <Route path={HOME} element={<HomePage />} />
+                <Route path={PROJECTDEATILS} element={<ProjectDeatilsPage />} />
+                <Route path={AICHATBOAD} element={<AIChatboadPage />} />
+              </Route>
             </Route>
 
             <Route element={<PublicRoute />}>

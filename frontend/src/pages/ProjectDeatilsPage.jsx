@@ -65,7 +65,6 @@ function ProjectDeatilsPage() {
     setEditTaskId(false);
     setOpenTask(false);
   };
-  console.log(project);
   if (!project) return <div>Loading...</div>;
   return (
     <div className="bg-(--bg-card) shadow-(--shadow) border border-(--border) rounded-xl p-4 md:p-6 mb-6">
