@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
 import Button from "../components/Button";
 import SendIcon from "@mui/icons-material/Send";
+import CircularProgress from "@mui/material/CircularProgress";
 import InputField from "../components/Forms/InputField";
 import { aiChatPresenters } from "../presenters/aiChatPresenters";
 import { AiChatContext } from "../context/aiChatContext";
@@ -8,15 +9,30 @@ import { AiChatContext } from "../context/aiChatContext";
 function AIChatboadPage() {
   const { aiChatData, setAiChatData } = useContext(AiChatContext);
   const [messages, setMessages] = useState([]);
-
+  const [loading, setLoading] = useState(false);
   const [input, setInput] = useState("");
   const bottomRef = useRef(null);
 
   const handleSend = async () => {
-    if (!input.trim()) return;
+    if (!input.trim() || loading) return;
+
+    const userInput = input;
+
+    // show instantly
+    setMessages((prev) => [...prev, { role: "user", content: userInput }]);
+
     setInput("");
-    await aiChatPresenters.aiChat(input, aiChatData, setAiChatData);
+    setLoading(true);
+
+    await aiChatPresenters.aiChat(userInput, aiChatData, setAiChatData);
+
+    setLoading(false);
   };
+
+  
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   useEffect(() => {
     const formatted = aiChatData?.flatMap((a) => [
@@ -80,8 +96,8 @@ function AIChatboadPage() {
             }}
           />
 
-          <Button onClick={handleSend}>
-            <SendIcon />
+          <Button onClick={handleSend} disabled={loading}>
+            {loading ? <CircularProgress size={20} /> : <SendIcon />}
           </Button>
         </div>
       </div>

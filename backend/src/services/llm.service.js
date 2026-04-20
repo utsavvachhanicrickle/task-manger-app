@@ -8,13 +8,13 @@ export const LLMService = {
 
     const prompt = `${context}\nUser: ${message}\nAI:`;
 
-    const res = await fetch("http://localhost:11434/api/generate", {
+    const res = await fetch(process.env.LLM_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "phi",
+        model: process.env.LLM_MODEL,
         prompt,
         stream: false,
       }),
