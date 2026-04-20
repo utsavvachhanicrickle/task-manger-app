@@ -3,21 +3,15 @@ import { buttonInputTypes } from "../../utils/schema";
 import InputField from "../Forms/InputField";
 import Button from "../Button";
 
-function FilterDataComponents({ data = [], setData, component = [] }) {
-  const initalData = Object.fromEntries(
+function FilterDataComponents({ setData, component = [] }) {
+  const initialData = Object.fromEntries(
     component.map((dataset) => [dataset.name, dataset.value || ""]),
   );
 
-  const [filterData, setFilterData] = useState(initalData);
+  const [filterData, setFilterData] = useState(initialData);
 
   useEffect(() => {
-    const filtered = data.filter((item) => {
-      return Object.keys(filterData).every((key) => {
-        if (!filterData[key]) return true;
-        return item[key] === filterData[key];
-      });
-    });
-    setData(filtered);
+    setData(filterData);
   }, [filterData]);
 
   const handleChange = (name, value) => {
@@ -28,9 +22,9 @@ function FilterDataComponents({ data = [], setData, component = [] }) {
   };
 
   const handleReset = () => {
-    setFilterData(initalData);
-    setData(data);
+    setFilterData(initialData);
   };
+
   return (
     <div className="grid md:flex gap-4">
       <div className="grid md:flex gap-3 rounded-lg shadow">
@@ -46,8 +40,11 @@ function FilterDataComponents({ data = [], setData, component = [] }) {
           />
         ))}
       </div>
-      <div className="">
-        <Button className="w-full" onClick={handleReset}>Reset</Button>
+
+      <div>
+        <Button className="w-full" onClick={handleReset}>
+          Reset
+        </Button>
       </div>
     </div>
   );

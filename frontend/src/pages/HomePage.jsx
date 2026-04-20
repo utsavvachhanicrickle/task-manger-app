@@ -27,6 +27,9 @@ function HomePage() {
   const [project, setProject] = useState({});
   const [task, setTask] = useState({});
   const [projectOptions, setProjectOptions] = useState({});
+  const [filterTask, setFilterTask] = useState(tasks);
+
+  useEffect(() => setFilterTask(tasks), [tasks]);
 
   useEffect(() => {
     const fetProjects = async () =>
@@ -136,10 +139,12 @@ function HomePage() {
       <TaskNavabar
         handleProjectAdd={handleProjectAdd}
         handleTaskAdd={handleTaskAdd}
+        tasks={tasks}
+        setFilterTask={setFilterTask}
       />
 
       <TaskShownComponents
-        task={tasks}
+        task={filterTask}
         project={projects}
         handleDragTask={handleDragTask}
         handleDeleteTask={handleDeleteTask}
