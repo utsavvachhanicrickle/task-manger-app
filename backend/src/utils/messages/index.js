@@ -24,5 +24,7 @@ export const MESSAGES = {
   PROJECT_UPDATED: "Project Update",
   PROJECT_DELETED: "Project Delete",
   PROJECT_NOT_EXISTS: "Project will not exists",
-  DRAP_AND_DROP_DONE:"Drag and Drop Done !!"
+  DRAP_AND_DROP_DONE: "Drag and Drop Done !!",
+  AIGENRATESMESSAGE: "Answer Will Be created Successfully",
+  HISTERFETCHSUCCESSFULLY: "History Fetch Succesfully !!",
 };

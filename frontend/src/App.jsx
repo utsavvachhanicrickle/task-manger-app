@@ -16,6 +16,7 @@ import SignUp from "./pages/SignUp.jsx";
 import { AuthContextProvider } from "./context/authContext.jsx";
 import { DarkModeContextProvider } from "./context/darkModeContext.jsx";
 import { ProjectContextProvider } from "./context/projectCntext.jsx";
+import { AiChatContextProvider } from "./context/aiChatContext.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import PublicRoute from "./components/PublicRoute.jsx";
 
@@ -30,7 +31,9 @@ function App() {
               <Route element={<ProjectContextProvider />}>
                 <Route path={HOME} element={<HomePage />} />
                 <Route path={PROJECTDEATILS} element={<ProjectDeatilsPage />} />
-                <Route path={AICHATBOAD} element={<AIChatboadPage />} />
+                <Route element={<AiChatContextProvider />}>
+                  <Route path={AICHATBOAD} element={<AIChatboadPage />} />
+                </Route>
               </Route>
             </Route>
 
