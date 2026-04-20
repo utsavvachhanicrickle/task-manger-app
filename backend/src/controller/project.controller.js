@@ -1,5 +1,5 @@
 import { MESSAGES } from "../utils/messages/index.js";
-import { projectServices } from "../services/project.services.js";
+import { projectServices } from "../services/project.service.js";
 
 export const projectController = {
   createProjectControoler: async (req, res) => {
