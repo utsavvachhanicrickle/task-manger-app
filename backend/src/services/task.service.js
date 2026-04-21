@@ -41,7 +41,16 @@ export const taskServices = {
     return newTask;
   },
   updateTaskService: async (data, _id, userId) => {
-    const { title, desc, status, category, priority, phase, expiredAt } = data;
+    const {
+      title,
+      desc,
+      status,
+      category,
+      priority,
+      phase,
+      expiredAt,
+      projectId,
+    } = data;
     TaskValidation.notExistesData(data);
     const existingTask = await Task.findById(_id);
 
@@ -57,11 +66,27 @@ export const taskServices = {
     if (category) updateData.category = category;
     if (priority) updateData.priority = priority;
     if (phase) updateData.phase = phase;
+    if (
+      projectId &&
+      projectId.toString() !== existingTask.projectId.toString()
+    ) {
+      const newProjectsUpperTask = await Task.findOne({ projectId }).sort({
+        order: 1,
+      });
+      updateData.order = newProjectsUpperTask
+        ? newProjectsUpperTask.order - 1000
+        : 100000;
+      updateData.projectId = projectId;
+    }
 
     const updatedTask = await Task.findByIdAndUpdate(_id, updateData, {
       returnDocument: "after",
     });
-    return updatedTask;
+
+    const response = updatedTask.toObject(); 
+    response.lastProjectId = existingTask.projectId;
+
+    return response;
   },
   deleteTaskService: async (_id, userId) => {
     const existingTask = await Task.findById(_id);
