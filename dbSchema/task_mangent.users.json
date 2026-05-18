@@ -1,0 +1,41 @@
+[{
+  "_id": {
+    "$oid": "69de16947846ed0a15081e17"
+  },
+  "email": "vachhaniutsav2@gmail.com",
+  "password": "$2b$12$.Elkn6nTeHVkJwnsfWmQY.LIBPX5Vs1PoCtbPTML15xgmX0Ym/qvu",
+  "firstName": "Utsav",
+  "lastName": "Vachhani",
+  "createdAt": {
+    "$date": "2026-04-14T10:03:21.212Z"
+  },
+  "__v": 0,
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZhY2hoYW5pdXRzYXYyQGdtYWlsLmNvbSIsImlkIjoiNjlkZTE2OTQ3ODQ2ZWQwYTE1MDgxZTE3IiwiaWF0IjoxNzc5MDk3Nzc0LCJleHAiOjE3Nzk3MDI1NzR9.k63PFS7V22U38X9fhKX85_mKDIVXyCqCjV0X-Pcehos"
+},
+{
+  "_id": {
+    "$oid": "69df3511941f6ee6c8552e25"
+  },
+  "email": "vachhaniutsav262@gmail.com",
+  "password": "$2b$12$Ly6GTIIWbB6eeBCgazERwOxxJDV.DaPTcPVpI2.1iGT/a6OvrN1tG",
+  "firstName": "utsav",
+  "lastName": "vachhani",
+  "createdAt": {
+    "$date": "2026-04-15T06:45:04.200Z"
+  },
+  "__v": 0,
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZhY2hoYW5pdXRzYXYyNjJAZ21haWwuY29tIiwiaWQiOiI2OWRmMzUxMTk0MWY2ZWU2Yzg1NTJlMjUiLCJpYXQiOjE3NzY3NDczMDUsImV4cCI6MTc3NzM1MjEwNX0.px47_5wEwPlZVJA8-N7rkwl6tiQJ48fxKLNHdM8q4m8"
+},
+{
+  "_id": {
+    "$oid": "6a0adfef221d827b9db6eab9"
+  },
+  "email": "utsavvachhani.cs@gmail.com",
+  "password": "$2b$12$deWWt.ppwdx/nO3.L8tVHuRldAzDux3JGSmPQ35dMS1PDs.bZEYqO",
+  "firstName": "Utsav",
+  "lastName": "Vachhani",
+  "createdAt": {
+    "$date": "2026-05-18T09:45:36.011Z"
+  },
+  "__v": 0
+}]
