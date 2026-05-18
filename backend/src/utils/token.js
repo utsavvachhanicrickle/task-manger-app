@@ -8,7 +8,7 @@ export const genrateRefreshToken = async ({ email, id }) => {
 };
 
 export const genrateAccessToken = async ({ email, id }) => {
-  return jwt.sign({ email, id }, process.env.JWT_SECRET, { expiresIn: "15m" });
+  return jwt.sign({ email, id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "15m" });
 };
 
 export const verifyRefreshToken = async (refreshToken) => {

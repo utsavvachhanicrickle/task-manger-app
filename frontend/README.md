@@ -83,7 +83,7 @@ FRONTEND_URL=http://localhost:5173
 PORT=5000
 
 # JWT Secrets (change in production)
-JWT_SECRET=your_jwt_secret
+ACCESS_TOKEN_SECRET=your_ACCESS_TOKEN_SECRET
 REFRESH_TOKEN_SECRET=your_refresh_token_secret
 
 # Bcrypt salt rounds

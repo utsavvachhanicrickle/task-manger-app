@@ -1,5 +1,5 @@
 import { MESSAGES } from "../utils/messages/index.js";
-import { authServices } from "../services/auth.services.js";
+import { authServices } from "../services/auth.service.js";
 
 export const authController = {
   signUp: async (req, res) => {

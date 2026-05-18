@@ -1,14 +1,22 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { SIGNIN, SIGNUP, HOME, PROJECTDEATILS } from "./utils/route.js";
+import {
+  SIGNIN,
+  SIGNUP,
+  HOME,
+  PROJECTDEATILS,
+  AICHATBOAD,
+} from "./utils/route.js";
 import Navbar from "./components/Navabr.jsx";
 import Footer from "./components/Footer.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import ProjectDeatilsPage from "./pages/ProjectDeatilsPage.jsx";
+import AIChatboadPage from "./pages/AIChatboadPage.jsx";
 import SignIn from "./pages/SignIn.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import { AuthContextProvider } from "./context/authContext.jsx";
 import { DarkModeContextProvider } from "./context/darkModeContext.jsx";
 import { ProjectContextProvider } from "./context/projectCntext.jsx";
+import { AiChatContextProvider } from "./context/aiChatContext.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import PublicRoute from "./components/PublicRoute.jsx";
 
@@ -20,22 +28,13 @@ function App() {
           <Navbar />
           <Routes>
             <Route element={<ProtectedRoute />}>
-              <Route
-                path={HOME}
-                element={
-                  <ProjectContextProvider>
-                    <HomePage />
-                  </ProjectContextProvider>
-                }
-              />
-              <Route
-              path={PROJECTDEATILS}
-                element={
-                  <ProjectContextProvider>
-                    <ProjectDeatilsPage />
-                  </ProjectContextProvider>
-                }
-              />
+              <Route element={<ProjectContextProvider />}>
+                <Route path={HOME} element={<HomePage />} />
+                <Route path={PROJECTDEATILS} element={<ProjectDeatilsPage />} />
+                <Route element={<AiChatContextProvider />}>
+                  <Route path={AICHATBOAD} element={<AIChatboadPage />} />
+                </Route>
+              </Route>
             </Route>
 
             <Route element={<PublicRoute />}>

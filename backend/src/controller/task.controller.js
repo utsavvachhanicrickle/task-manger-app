@@ -1,4 +1,4 @@
-import { taskServices } from "../services/task.services.js";
+import { taskServices } from "../services/task.service.js";
 import { MESSAGES } from "../utils/messages/index.js";
 
 export const taskController = {

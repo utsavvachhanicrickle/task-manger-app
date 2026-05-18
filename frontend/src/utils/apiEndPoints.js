@@ -3,7 +3,7 @@ export const APIENDPOINTS = {
   SIGNUP: "/auth/signup",
   LOGOUT: "/auth/logout",
   REFRESHTOKEN: "/auth/refresh",
-  
+
   CREATETASK: "/task/add",
   UPDATETASK: "/task/update/",
   DELETETASK: "/task/delete/",
@@ -12,5 +12,8 @@ export const APIENDPOINTS = {
   CREATEPROJECT: "/project/add",
   UPDATEPROJECT: "/project/update/",
   DELETEPROJECT: "/project/delete/",
-  GETPROJECT: "/project/fetch"
+  GETPROJECT: "/project/fetch",
+
+  AICHATSTART: "ai/chat",
+  GETAICHATHISTORY: "ai/history",
 };

@@ -12,6 +12,7 @@ function InputField({
   onChange,
   required = false,
   options = [],
+  onKeyDown = () => {},
 }) {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -54,7 +55,7 @@ function InputField({
             {placeholder}
           </option>
 
-          {options.map((opt,index) => (
+          {options.map((opt, index) => (
             <option
               key={index}
               value={opt.value}
@@ -110,6 +111,7 @@ function InputField({
         onChange={(e) => onChange(name, e.target.value, type)}
         required={required}
         placeholder={placeholder}
+        onKeyDown={onKeyDown}
       />
 
       {type === buttonInputTypes.PASSWORD && (
